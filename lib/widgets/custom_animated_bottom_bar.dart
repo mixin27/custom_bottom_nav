@@ -12,6 +12,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     required this.onItemSelected,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.itemCornerRadius = 50,
+    this.containerCornerRadius = 0,
     this.containerHeight = 56,
     this.curve = Curves.linear,
   })  : assert(items.length >= 2 && items.length <= 5),
@@ -26,6 +27,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
   final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
+  final double containerCornerRadius;
   final double containerHeight;
   final Curve curve;
 
@@ -34,18 +36,22 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     final bgColor = backgroundColor ?? Theme.of(context).bottomAppBarColor;
 
     return Container(
-      decoration: BoxDecoration(color: bgColor, boxShadow: [
-        if (showElevation)
-          const BoxShadow(
-            color: Colors.black12,
-            blurRadius: 2,
-          )
-      ]),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(containerCornerRadius),
+        boxShadow: [
+          if (showElevation)
+            const BoxShadow(
+              color: Colors.black12,
+              blurRadius: 2,
+            )
+        ],
+      ),
       child: SafeArea(
         child: Container(
           width: double.infinity,
           height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {

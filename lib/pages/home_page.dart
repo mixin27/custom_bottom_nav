@@ -23,7 +23,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.purple[200],
       ),
       body: _buildBody(),
-      bottomNavigationBar: _buildBottomBar(),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(10),
+        child: _buildBottomBar(),
+      ),
     );
   }
 
@@ -84,6 +87,7 @@ class _HomePageState extends State<HomePage> {
       selectedIndex: _currentIndex,
       showElevation: true,
       itemCornerRadius: 24,
+      containerCornerRadius: 24,
       curve: Curves.easeIn,
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <BottomNavyBarItem>[
